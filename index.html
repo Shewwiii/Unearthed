@@ -5,24 +5,23 @@
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/jquery.csv-0.71.js"></script>
 	<script src="js/main.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
 	
 </head>
-
 
 <body>
 
 	<h1>WesTrac/AWS Predictive Maintenance using Oil Samples</h1>
-	<h2>Data</h2>
+	
+	<ul id="toc">
+		<li><span>Introduction</span> <a href="#">Chapter 1</a></li>
+		<li><span>Storm clouds looming</span> <a href="#">Chapter 2</a></li>
+	</ul>
 
 	<div id="inputs" class=clearfix>
   		<input type=file id="files" name=files[] multiple />
 	</div>
-	<select id = "option">
-  		<option value="A">A</option>
-  		<option value="B">B</option>
-  		<option value="C">C</option>
-  		<option value="X">X</option>
-	</select>
 	<button id="generate">generate</button>
 	<hr />
 		<output id="list"></output>

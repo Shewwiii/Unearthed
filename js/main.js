@@ -71,26 +71,45 @@ function printTable(file) {
 		c = '';
 		b = '';
 		a = '';
+
 		for(var row in data) {
-			if(data[row].Grade == "X") {
+
+			var points = 0;
+			var commentary = '';
+			var oilConsumption = data[row].oiladded/data[row].oilhours;
+			commentary += oilConsumption;
+			if(data[row].NIT >= 11 && data[row].SUL >=24) {
+				points += 1;
+				//commentary += ' blah';
+			}
+			if(data[row].Fe >= 10) {
+				points += 1;
+				commentary += ' Iron is high.'
+			}
+			if(data[row].) {
+				points +=
+			}
+
+
+			if(points > 2) {
 				x += '<tr>\r\n';
 				for(var item in data[row]) {
 					x += '<td>' + data[row][item] + '</td>\r\n';
 				}
 				x += '</tr>\r\n';
-			} else if (data[row].Grade == "C") {
+			} else if (points == 2) {
 				c += '<tr>\r\n';
 				for(var item in data[row]) {
 					c += '<td>' + data[row][item] + '</td>\r\n';
 				}
 				c += '</tr>\r\n';
-			} else if (data[row].Grade == "B") {
+			} else if (points == 1) {
 				b += '<tr>\r\n';
 				for(var item in data[row]) {
 					b += '<td>' + data[row][item] + '</td>\r\n';
 				}
 				b += '</tr>\r\n';
-			} else if (data[row].Grade == "A") {
+			} else if (points == 0) {
 				a += '<tr>\r\n';
 				for(var item in data[row]) {
 					a += '<td>' + data[row][item] + '</td>\r\n';
