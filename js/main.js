@@ -5,15 +5,23 @@ var a = '';
 
 
 $(document).ready(function() {
-	if(isAPIAvailable()) {
-		$('#files').bind('change', handleFileSelect);
-	}
+	document.getElementById("lab_issues").addEventListener("click", function(){
 
-	document.getElementById("generate").addEventListener("click", function(){
-	alert("alert");
-	var html = x+c+b+a;
-	$('#contents').html(html);
+		document.getElementById('inputs').innerHTML = '<input type=file id="files" name=files[] multiple /><button id="generate">generate</button>';
+
+		if(isAPIAvailable()) {
+			$('#files').bind('change', handleFileSelect);
+		}
+
+		document.getElementById("generate").addEventListener("click", function(){
+			var html = x+c+b+a;
+			document.getElementById('inputs').innerHTML = '<table id="contents" border></table>';
+			$('#contents').html(html);
+		});
+
 	});
+
+	
 
 });
 
@@ -77,7 +85,7 @@ function printTable(file) {
 			var points = 0;
 			var commentary = "";
 			var oilConsumption = data[row].oiladded/data[row].oilhours;
-			commentary += "Oil Consuption at " + Math.round(oilConsumption * 100) / 100 + "l/Hr";
+			commentary += "Oil Consumption at " + Math.round(oilConsumption * 100) / 100 + "l/Hr. ";
 			if(data[row].NIT >= 11 && data[row].SUL >=24) {
 				points += 1;
 				commentary += " Nitration and sulphur are high which can be caused by engine combustion blow-by; cooling system temperatures outside recommended specifications during some operating conditions; engine lugging; or insufficient engine rundown prior to hot shut downs.";
@@ -127,7 +135,7 @@ function printTable(file) {
 			}
 			if(data[row].oiladded >= 71) {
 				points += 1;
-				commentary += ' The quantity of oil added; may cause less wear to be indicated.';
+				commentary += ' The quantity of oil added may cause less wear to be indicated.';
 			}
 			if(data[row].PQI >= 11) {
 				points += 1;
@@ -139,33 +147,25 @@ function printTable(file) {
 			}
 
 			if(points > 2) {
-				commentary += 'For enquiries regarding this evaluation, please contact (07) 3219 0000';
-				x += '<tr>\r\n' + '<td>' + commentary + '</td>\r\n';
-				for(var item in data[row]) {
-					x += '<td>' + data[row][item] + '</td>\r\n';
-				}
+				commentary += ' For enquiries regarding this evaluation, please contact (07) 3219 0000.';
+				x += '<tr>\r\n' + '<td>X</td>\r\n'+ '<td>' + commentary + '</td>\r\n';
+				x += '<td>' + data[row].serialno + '</td>\r\n';
 				x += '</tr>\r\n';
 			} else if (points == 2) {
-				commentary += 'For enquiries regarding this evaluation, please contact (07) 3219 0000';
-				c += '<tr>\r\n' + '<td>' + commentary + '</td>\r\n';
-				for(var item in data[row]) {
-					c += '<td>' + data[row][item] + '</td>\r\n';
-				}
+				commentary += ' For enquiries regarding this evaluation, please contact (07) 3219 0000.';
+				c += '<tr>\r\n' + '<td>C</td>\r\n' + '<td>' + commentary + '</td>\r\n';
+				c += '<td>' + data[row].serialno + '</td>\r\n';
 				c += '</tr>\r\n';
 			} else if (points == 1) {
-				commentary += 'For enquiries regarding this evaluation, please contact (07) 3219 0000';
-				b += '<tr>\r\n' + '<td>' + commentary + '</td>\r\n';
-				for(var item in data[row]) {
-					b += '<td>' + data[row][item] + '</td>\r\n';
-				}
+				commentary += ' For enquiries regarding this evaluation, please contact (07) 3219 0000.';
+				b += '<tr>\r\n' + '<td>B</td>\r\n' + '<td>' + commentary + '</td>\r\n';
+				b += '<td>' + data[row].serialno + '</td>\r\n';
 				b += '</tr>\r\n';
 			} else if (points == 0) {
 				commentary += 'All test results appear normal. Continue to sample at consistent intervals.';
-				commentary += 'For enquiries regarding this evaluation, please contact (07) 3219 0000';
-				a += '<tr>\r\n' + '<td>' + commentary + '</td>\r\n';
-				for(var item in data[row]) {
-					a += '<td>' + data[row][item] + '</td>\r\n';
-				}
+				commentary += ' For enquiries regarding this evaluation, please contact (07) 3219 0000.';
+				a += '<tr>\r\n' + '<td>A</td>\r\n' + '<td>' + commentary + '</td>\r\n';
+				a += '<td>' + data[row].serialno + '</td>\r\n';
 				a += '</tr>\r\n';
 			}
 		}
