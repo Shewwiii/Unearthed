@@ -80,16 +80,70 @@ function printTable(file) {
 			commentary += oilConsumption;
 			if(data[row].NIT >= 11 && data[row].SUL >=24) {
 				points += 1;
-				//commentary += ' blah';
+				commentary += ' Nitration and sulphur are high which can be caused by engine combustion blow-by; 
+				cooling system temperatures outside recommended specifications during some operating conditions; 
+				engine lugging; or insufficient engine rundown prior to hot shut downs.';
 			}
 			if(data[row].Fe >= 10) {
 				points += 1;
-				commentary += ' Iron is high.'
+				commentary += ' Iron is high.';
 			}
-			if(data[row].) {
-				points +=
+			if(data[row].Cu >= 12) {
+				points += 1;
+				commentary += ' Copper is high. Check filter media and screen for wear particles.';
 			}
-
+			if(data[row].H20 >= 1) {
+				commentary += ' Sample is contaminated by water.';
+			}
+			if(data[row].Pb >= 4 && data[row].Pb <10) {
+				points += 1;
+				commentary += ' Lead is high. Check filter media and screen for wear particles.';
+			}
+			if(data[row].Pb >= 10) {
+				points += 2;
+				commentary += ' Lead is very high. Check filter media and screen for wear particles.';
+			}
+			if(data[row].TBN <= 5) {
+				points += 1;
+				commentary += ' Oil is deteriorating.';
+			}
+			if(data[row].oilhours > 500) {
+				points += 1;
+				commentary += ' Oil service interval should not exceed 500 hours.';
+			}
+			if(data[row].ST >= 19) {
+				points += 1;
+				commentary += ' Check dusty/restricted air filter elements.';
+			}
+			if(data[row].Mo >= 4) {
+				points += 1;
+				commentary += ' The molybendium may indicate coolant entry.';
+			}
+			if(data[row].Na >= 9) {
+				points += 1;
+				commentary += ' The sodium may indicate coolant entry. The sodium may 
+				indicate washdown/external water entry. Check the seals; breathers and fill point for water 
+				entry points.';
+			}
+			if(data[row].K >= 20) {
+				points += 1;
+				commentary += ' The potassium may indicate coolant entry.';
+			}
+			if(data[row].oiladded >= 71) {
+				points += 1;
+				commentary += ' The quantity of oil added; may cause less wear to be indicated.';
+			}
+			if(data[row].PQI >= 11) {
+				points += 1;
+				commentary += ' The PQ index is high. Fine ferrous metal particles visible 
+				in this sample.';
+			}
+			if(data[row].V40 >= 130) {
+				points += 1;
+				commentary += ' The viscosity levels are elevated. This can be from incorrect 
+				operating procedures / temperatures or combustion blowby. Investigate the cause and 
+				resample to confirm the effectiveness of any adjustments or repairs.';
+			}
 
 			if(points > 2) {
 				x += '<tr>\r\n';
