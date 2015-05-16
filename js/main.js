@@ -75,14 +75,12 @@ function printTable(file) {
 		for(var row in data) {
 
 			var points = 0;
-			var commentary = '';
+			var commentary = "";
 			var oilConsumption = data[row].oiladded/data[row].oilhours;
-			commentary += oilConsumption;
+			commentary += "Oil Consuption at " + Math.round(oilConsumption * 100) / 100 + "l/Hr";
 			if(data[row].NIT >= 11 && data[row].SUL >=24) {
 				points += 1;
-				commentary += ' Nitration and sulphur are high which can be caused by engine combustion blow-by; 
-				cooling system temperatures outside recommended specifications during some operating conditions; 
-				engine lugging; or insufficient engine rundown prior to hot shut downs.';
+				commentary += " Nitration and sulphur are high which can be caused by engine combustion blow-by; cooling system temperatures outside recommended specifications during some operating conditions; engine lugging; or insufficient engine rundown prior to hot shut downs.";
 			}
 			if(data[row].Fe >= 10) {
 				points += 1;
@@ -121,9 +119,7 @@ function printTable(file) {
 			}
 			if(data[row].Na >= 9) {
 				points += 1;
-				commentary += ' The sodium may indicate coolant entry. The sodium may 
-				indicate washdown/external water entry. Check the seals; breathers and fill point for water 
-				entry points.';
+				commentary += ' The sodium may indicate coolant entry. The sodium may indicate washdown/external water entry. Check the seals; breathers and fill point for water entry points.';
 			}
 			if(data[row].K >= 20) {
 				points += 1;
@@ -135,36 +131,38 @@ function printTable(file) {
 			}
 			if(data[row].PQI >= 11) {
 				points += 1;
-				commentary += ' The PQ index is high. Fine ferrous metal particles visible 
-				in this sample.';
+				commentary += ' The PQ index is high. Fine ferrous metal particles visible in this sample.';
 			}
 			if(data[row].V40 >= 130) {
 				points += 1;
-				commentary += ' The viscosity levels are elevated. This can be from incorrect 
-				operating procedures / temperatures or combustion blowby. Investigate the cause and 
-				resample to confirm the effectiveness of any adjustments or repairs.';
+				commentary += ' The viscosity levels are elevated. This can be from incorrect operating procedures / temperatures or combustion blowby. Investigate the cause and resample to confirm the effectiveness of any adjustments or repairs.';
 			}
 
 			if(points > 2) {
-				x += '<tr>\r\n';
+				commentary += 'For enquiries regarding this evaluation, please contact (07) 3219 0000';
+				x += '<tr>\r\n' + '<td>' + commentary + '</td>\r\n';
 				for(var item in data[row]) {
 					x += '<td>' + data[row][item] + '</td>\r\n';
 				}
 				x += '</tr>\r\n';
 			} else if (points == 2) {
-				c += '<tr>\r\n';
+				commentary += 'For enquiries regarding this evaluation, please contact (07) 3219 0000';
+				c += '<tr>\r\n' + '<td>' + commentary + '</td>\r\n';
 				for(var item in data[row]) {
 					c += '<td>' + data[row][item] + '</td>\r\n';
 				}
 				c += '</tr>\r\n';
 			} else if (points == 1) {
-				b += '<tr>\r\n';
+				commentary += 'For enquiries regarding this evaluation, please contact (07) 3219 0000';
+				b += '<tr>\r\n' + '<td>' + commentary + '</td>\r\n';
 				for(var item in data[row]) {
 					b += '<td>' + data[row][item] + '</td>\r\n';
 				}
 				b += '</tr>\r\n';
 			} else if (points == 0) {
-				a += '<tr>\r\n';
+				commentary += 'All test results appear normal. Continue to sample at consistent intervals.';
+				commentary += 'For enquiries regarding this evaluation, please contact (07) 3219 0000';
+				a += '<tr>\r\n' + '<td>' + commentary + '</td>\r\n';
 				for(var item in data[row]) {
 					a += '<td>' + data[row][item] + '</td>\r\n';
 				}
