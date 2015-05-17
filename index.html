@@ -4,6 +4,7 @@
 	<title>WesTrac/AWS Predictive Maintenance using Oil Samples</title>
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/jquery.csv-0.71.js"></script>
+	<script src="js/jspdf.debug.js"></script>
 	<script src="js/main.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="style.css">
@@ -12,17 +13,27 @@
 
 <body>
 
-	<h1>WesTrac/AWS Predictive Maintenance using Oil Samples</h1>
-	
-	<ul id="menu">
-		<li id="lab_issues"><a>Lab Issue(s)</a></li>
-		<li><a>Maintenance Issue(s)</a></li>
-	</ul>
-
-	<div id="inputs" class=clearfix>
-  		Please select a tab
+	<div id="title">
+		<a href="#"><img src="images/logo.png" alt="" border="0" title="" /></a><br />
+		<!--<h1>WesTrac / AWS</h1>
+		<p>
+			Predictive Maintenance using Oil Samples
+		</p>-->
 	</div>
+
+	<div id="container">
+
+		<ul id="menu">
+			<li id="lab_issues"><a>Lab Issue(s)</a></li>
+			<li id="maintenance"><a>Maintenance Issue(s)</a></li>
+		</ul>
+
+		<div id="inputs" class=clearfix>
+	  		Please select a tab
+	  		
+		</div>
 	
+	</div>
 	<!-- <hr /><output id="list"></output><hr /><table id="contents" border></table> -->
 
 

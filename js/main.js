@@ -1,3 +1,4 @@
+
 var x = '';
 var c = '';
 var b = '';
@@ -5,7 +6,10 @@ var a = '';
 
 
 $(document).ready(function() {
+
+	
 	document.getElementById("lab_issues").addEventListener("click", function(){
+		document.getElementById("lab_issues").className = "selected";
 
 		document.getElementById('inputs').innerHTML = '<input type=file id="files" name=files[] multiple /><button id="generate">generate</button>';
 
@@ -14,9 +18,35 @@ $(document).ready(function() {
 		}
 
 		document.getElementById("generate").addEventListener("click", function(){
-			var html = x+c+b+a;
-			document.getElementById('inputs').innerHTML = '<table id="contents" border></table>';
+			var heading = '<tr><th>Grade</th><th>SerialNo</th><th>Issues</th></tr>';
+			var html = heading+x+c+b+a;
+			document.getElementById('inputs').innerHTML = '<div id="scroll"><table id="contents" border></table></div><button id="pdf">Download PDF</button>';
 			$('#contents').html(html);
+
+			document.getElementById("pdf").addEventListener("click", function(){
+				var doc = new jsPDF();
+				doc.text(20, 20, processpdf(x));
+				doc.addPage();
+				doc.text(20, 20, processpdf(c));
+				doc.addPage();
+				doc.text(20, 20, processpdf(b));
+				doc.addPage();
+				doc.text(20, 20, processpdf(a));
+				doc.save('Lab_issues.pdf');
+
+				function processpdf(grade) {
+					console.log(grade);
+					text = grade.replace(/<td>/g, '');
+					text = text.replace(/<\/td>/g, '');
+					text = text.replace(/<\/tr>/g, '');
+					text = text.replace(/<tr class = "x">/g, '');
+					text = text.replace(/<tr class = "c">/g, '');
+					text = text.replace(/<tr class = "b">/g, '');
+					text = text.replace(/<tr class = "a">/g, '');
+					return text;
+				}
+			});
+
 		});
 
 	});
@@ -148,24 +178,28 @@ function printTable(file) {
 
 			if(points > 2) {
 				commentary += ' For enquiries regarding this evaluation, please contact (07) 3219 0000.';
-				x += '<tr>\r\n' + '<td>X</td>\r\n'+ '<td>' + commentary + '</td>\r\n';
+				x += '<tr class = "x">\r\n' + '<td>X</td>\r\n';
 				x += '<td>' + data[row].serialno + '</td>\r\n';
+				x += '<td>' + commentary + '</td>\r\n';
 				x += '</tr>\r\n';
 			} else if (points == 2) {
 				commentary += ' For enquiries regarding this evaluation, please contact (07) 3219 0000.';
-				c += '<tr>\r\n' + '<td>C</td>\r\n' + '<td>' + commentary + '</td>\r\n';
+				c += '<tr class = "c">\r\n' + '<td>C</td>\r\n';
 				c += '<td>' + data[row].serialno + '</td>\r\n';
+				c += '<td>' + commentary + '</td>\r\n';
 				c += '</tr>\r\n';
 			} else if (points == 1) {
 				commentary += ' For enquiries regarding this evaluation, please contact (07) 3219 0000.';
-				b += '<tr>\r\n' + '<td>B</td>\r\n' + '<td>' + commentary + '</td>\r\n';
+				b += '<tr class = "b">\r\n' + '<td>B</td>\r\n';
 				b += '<td>' + data[row].serialno + '</td>\r\n';
+				b += '<td>' + commentary + '</td>\r\n';
 				b += '</tr>\r\n';
 			} else if (points == 0) {
 				commentary += 'All test results appear normal. Continue to sample at consistent intervals.';
 				commentary += ' For enquiries regarding this evaluation, please contact (07) 3219 0000.';
-				a += '<tr>\r\n' + '<td>A</td>\r\n' + '<td>' + commentary + '</td>\r\n';
+				a += '<tr class = "a">\r\n' + '<td>A</td>\r\n';
 				a += '<td>' + data[row].serialno + '</td>\r\n';
+				a += '<td>' + commentary + '</td>\r\n';
 				a += '</tr>\r\n';
 			}
 		}
